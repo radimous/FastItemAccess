@@ -8,5 +8,5 @@ filtering required items for the collection quest instead of checking all stacks
 skipping non coin items when checking if player has enough coins and deducting coins in [MixinCoinDefinition](https://github.com/radimous/FastItemAccess/blob/master/src/main/java/com/radimous/fastitemaccess/mixin/MixinCoinDefinition.java) (Client & Server)  
 
 in addition to the faster checking by using the item reference it also does this:  
-restrict backpack capability checking to backpack items in [MixinIntegrationSB](https://github.com/radimous/FastItemAccess/blob/master/src/main/java/com/radimous/fastitemaccess/mixin/MixinIntegrationSB.java) (Client & Server)
+restrict backpack capability checking to backpack items in [MixinIntegrationSB](https://github.com/radimous/FastItemAccess/blob/master/src/main/java/com/radimous/fastitemaccess/mixin/MixinIntegrationSB.java) (Client & Server)  
 searches the inventory for legendary bounty only when player is looking at the bounty block once per tick (instead of searching every tick regardless of visible bounty table) in [MixinClientBountyData](https://github.com/radimous/FastItemAccess/blob/master/src/main/java/com/radimous/fastitemaccess/mixin/MixinClientBountyData.java) (Client)  
