@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.radimous.fastitemaccess.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "fastitemaccess.refmap.json",
+  "plugin": "com.radimous.fastitemaccess.mixin.ConditionalMixinPlugin",
+  "mixins": [
+    "MixinCoinDefinition",
+    "MixinCollectionQuest",
+    "MixinIntegrationSB",
+    "MixinInventoryUtil",
+    "MixinItemAccess",
+    "MixinWoldInventoryUtil"
+  ],
+  "client": [
+    "MixinClientBountyData"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
