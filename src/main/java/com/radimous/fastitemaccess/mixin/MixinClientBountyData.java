@@ -29,7 +29,8 @@ public class MixinClientBountyData {
     @Unique private static long fastitemaccess$lastLostBountyTick = -1;
 
 
-    @Redirect(method = "onClientTick", at = @At(value = "INVOKE", target = "Liskallia/vault/util/InventoryUtil;findAllItems(Lnet/minecraft/world/entity/player/Player;)Ljava/util/List;"))
+    // require = 0 for unobtanium, which has the same injection
+    @Redirect(method = "onClientTick", at = @At(value = "INVOKE", target = "Liskallia/vault/util/InventoryUtil;findAllItems(Lnet/minecraft/world/entity/player/Player;)Ljava/util/List;"), require = 0)
     private static List<InventoryUtil.ItemAccess> onClientTick(Player inventoryFn) {
         return List.of();
     }
