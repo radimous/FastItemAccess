@@ -1,6 +1,5 @@
 package com.radimous.fastitemaccess.mixin;
 
-import com.radimous.fastitemaccess.ExtendedItemAccess;
 import iskallia.vault.integration.IntegrationSB;
 import iskallia.vault.util.InventoryUtil;
 import net.p3pp3rf1y.sophisticatedbackpacks.backpack.BackpackItem;
@@ -17,11 +16,8 @@ public class MixinIntegrationSB {
     @Inject(method = "getBackpackItemAccess", at = @At("HEAD"), cancellable = true)
     private static void fastergetBackpackItemAccess(InventoryUtil.ItemAccess backpackAccess,
                                                     CallbackInfoReturnable<List<InventoryUtil.ItemAccess>> cir){
-        if (backpackAccess instanceof ExtendedItemAccess eia){
-            var item = eia.fastitemaccess$getItem();
-            if (!(item instanceof BackpackItem)){
-                cir.setReturnValue(Collections.emptyList());
-            }
+        if (!(backpackAccess.getItem() instanceof BackpackItem)){
+            cir.setReturnValue(Collections.emptyList());
         }
     }
 }

@@ -1,8 +1,6 @@
 package com.radimous.fastitemaccess.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import com.radimous.fastitemaccess.ExtendedItemAccess;
-import com.radimous.fastitemaccess.Fastitemaccess;
 import iskallia.vault.quest.type.CollectionQuest;
 import iskallia.vault.util.InventoryUtil;
 import net.minecraft.world.item.Item;
@@ -17,11 +15,12 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 /*
+ reverse filter and map order to avoid expensive getStack call
  FROM
  InventoryUtil.findAllItems(sPlayer).stream().map(InventoryUtil.ItemAccess::getStack).filter((stack) -> itemQuestMap.containsKey(stack.getItem())).forEach((stack) -> {
 
  TO
- InventoryUtil.findAllItems(sPlayer).stream().filter(ia -> itemQuestMap.containsKey(ia.fastitemaccess$getItem())).map(InventoryUtil.ItemAccess::getStack).forEach((stack) -> {
+ InventoryUtil.findAllItems(sPlayer).stream().filter(ia -> itemQuestMap.containsKey(ia.getItem())).map(InventoryUtil.ItemAccess::getStack).forEach((stack) -> {
  */
 @Mixin(value = CollectionQuest.class, remap = false)
 public class MixinCollectionQuest {
@@ -29,12 +28,7 @@ public class MixinCollectionQuest {
     private static Stream<ItemStack> checkCollections(Stream<InventoryUtil.ItemAccess> instance, Function<? super InventoryUtil.ItemAccess, ItemStack> function,
                                                       @Local(ordinal = 0) Map<Item, List<CollectionQuest>> itemQuestMap){
         return instance
-            .filter(ia -> {
-                if (ia instanceof ExtendedItemAccess eia) {
-                    return itemQuestMap.containsKey(eia.fastitemaccess$getItem());
-                }
-                return true;
-            })
+            .filter(ia -> itemQuestMap.containsKey(ia.getItem()))
             .map(InventoryUtil.ItemAccess::getStack);
     }
 

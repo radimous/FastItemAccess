@@ -4,14 +4,9 @@
   "package": "com.radimous.fastitemaccess.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "fastitemaccess.refmap.json",
-  "plugin": "com.radimous.fastitemaccess.mixin.ConditionalMixinPlugin",
   "mixins": [
-    "MixinCoinDefinition",
     "MixinCollectionQuest",
-    "MixinIntegrationSB",
-    "MixinInventoryUtil",
-    "MixinItemAccess",
-    "MixinWoldInventoryUtil"
+    "MixinIntegrationSB"
   ],
   "client": [
     "MixinClientBountyData"

@@ -1,6 +1,5 @@
 package com.radimous.fastitemaccess.mixin;
 
-import com.radimous.fastitemaccess.ExtendedItemAccess;
 import iskallia.vault.bounty.client.ClientBountyData;
 import iskallia.vault.init.ModItems;
 import iskallia.vault.util.InventoryUtil;
@@ -49,7 +48,7 @@ public class MixinClientBountyData {
         }
         if (player.tickCount != fastitemaccess$lastLostBountyTick) {
             fastitemaccess$lastLostBountyTick = player.tickCount;
-            hasLostBountyInInventory = InventoryUtil.findAllItems(player).stream().anyMatch(ia -> ia instanceof ExtendedItemAccess eia && eia.fastitemaccess$getItem() == ModItems.LOST_BOUNTY);
+            hasLostBountyInInventory = InventoryUtil.findAllItems(player).stream().anyMatch(ia -> ia.getItem() == ModItems.LOST_BOUNTY);
         }
     }
 }
